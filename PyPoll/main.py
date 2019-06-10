@@ -22,7 +22,7 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
 
 total_votes= len(voterid)
 
-#for grouping candidates- creating dictionary
+#for grouping candidates- creating dictionary- attempt
 # candidategrp = {}
 # for name in candidate:
 #     pull=len(name)
@@ -40,18 +40,26 @@ print("-" * 20)
 
 # d = defaultdict(int)
 # for name in candidate:
-#     d[name] += 1
+#    d[name] += 1
 # print (d)
 
+# below created a dictionary. pulled keys (i) and values (candidategrp[i]) out of the dictionary.
 from collections import Counter
 candidategrp= Counter(candidate)
-print(f" Candidate groups: {candidategrp}")
+#print(f"Candidate groups: {candidategrp}")
+#print(f"{candidategrp['Khan']}")
+for i in candidategrp:
+    print (i, candidategrp[i])
+    # candperc= int(candidategrp[i])
+    # percentage= (candperc/total_votes) * 100
+    # print=(f"{percentage}")
+
 
 print("-" * 20)
 
 print("Winner: Khan")
 
-# output_file = os.path.join("electionresults.csv")
+# output_file = os.path.join("..", "Output", "electionresults.csv")
 
 # with open(output_file, "w", newline="", encoding="utf8") as csv_file:
     
