@@ -7,66 +7,72 @@ profitloss=[]
 
 with open(csv_path, newline="", encoding="utf8") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
-    print (csv_reader)
+    #print (csv_reader)
 
     csv_header = next(csv_reader)
+    previous_value_row = next(csv_reader)
+    #print(previous_value_row)
+    date.append(previous_value_row[0])
+    previous_value = previous_value_row[1]
+    greatest_profit = 0
+    greatest_loss = 0
+    best_month = ""
+    worst_month = ""
+    totalprofit= 0
+    totalloss= 0
+    profitcalc= 0
+    totalprofitloss= 0
+    
 
     for row in csv_reader:
+# to calculate change in p/l month over month
         date.append(row[0])
-        profitloss.append(row[1])
+        value= int(row[1])-int(previous_value)
+        profitloss.append(value)
+        previous_value = (row[1])
+
 #print(date)
 #print(profitloss)
+#below is to the greatest profit and loss date and change
+        if value>greatest_profit:
+            greatest_profit = value
+            best_month = row[0]
+        elif value<greatest_loss:
+            greatest_loss = value
+            worst_month = row[0]
+#print(best_month, worst_month)
+        profitcalc = int(row[1])
+        if profitcalc > 0:
+            totalprofit += profitcalc
+        elif profitcalc < 0:
+            totalloss += profitcalc
+        totalprofitloss = totalprofit + totalloss
 
 total_months= len(date) 
 max_profit= max(profitloss)
 min_profit= min(profitloss)
-
-totalprofit=0
-totalloss=0
-profitcalc=0
-totalprofitloss=0
-
-increase_date=0
-greatestincrease=0
-decreate_date=0
-greatestdecrease=0
-
-#for row in csv_reader
-profitcalc = int(row[1])
-if profitcalc > 0:
-    totalprofit += profitcalc
-elif profitcalc < 0:
-    totalloss += profitcalc
-totalprofitloss = totalprofit - totalloss
-
-#for greatest increase date
-# increase_date= (row[0])
-# if row[1] = max_profit:
-#     greatestincrease= increase_date
-# else increase_date=0
-
-# #for greatest decreate date
-# decrease_date=(row[0])
-# if row[1] = min_profit:
-#     greatestdecrease= decrease_date
-# else decrease_date=0
-
+#average= int(profitloss/total_months)
 
 print("Financial Analysis")
 print("-" * 20)
 print(f"Total Months: {total_months}")
 print(f"Total: {totalprofitloss}")
+#print(f"Average: {average}")
 print(f"Greatest increase in profits: {max_profit}")
 print(f"Greatest decrease in profits: {min_profit}")
-# print(f"Greatest Increase in profits: {greatestincrease} {max_profit}")
-# print(f"Greatest Decrease in profits: {greatestdecrease} {amtdecrease}")
+print("Month with greatest Increase in profits:", best_month)
+print("Month with greatest Decrease in profits:", worst_month)
 
 
-# output_file = os.path.join("bankoutput.csv")
+output_file = os.path.join("..", "Output", "bankoutput.csv")
 
 # with open(output_file, "w", newline="", encoding="utf8") as csv_file:
     
 #     csv_writer = csv.writer(csv_file, delimiter=",")
 
-#     csv_writer.writerows(f"inal)
+#     csv_writer.writerows(final)
 
+# total profit and loss doesn't tie to word doc, average not working
+# can't add month variables to increase and decrease profit (as these are functions and months are variables?)
+# output file creation not working
+# how do we put all results in 1 variable to enter in the output file?
