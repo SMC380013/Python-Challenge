@@ -12,6 +12,10 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
 
     csv_header = next(csv_reader)
 
+    previous_poll=0
+    winner_name=int(0)
+
+
     for row in csv_reader:
         voterid.append(row[0])
         county.append(row[1])
@@ -20,49 +24,44 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
 #print(county)
 #print(candidate)
 
+#int for total_votes?
 total_votes= len(voterid)
-
-#for grouping candidates- creating dictionary- attempt
-# candidategrp = {}
-# for name in candidate:
-#     pull=len(name)
-#     if pull not in candidategrp:
-#         candidategrp[pull]=0
-#     else candidategrp[pull].append(name)   
-# print(f{candidategrp})
 
 print("Election Results")
 print("-" * 20)
 print(f"Total Votes: {total_votes}")
 print("-" * 20)
 
-# from collections import defaultdict
-
-# d = defaultdict(int)
-# for name in candidate:
-#    d[name] += 1
-# print (d)
-
 # below created a dictionary. pulled keys (i) and values (candidategrp[i]) out of the dictionary.
 from collections import Counter
 candidategrp= Counter(candidate)
-#print(f"Candidate groups: {candidategrp}")
-#print(f"{candidategrp['Khan']}")
+# #print(f"Candidate groups: {candidategrp}")
+# #print(f"{candidategrp['Khan']}")
 for i in candidategrp:
     print (i, candidategrp[i])
-    # candperc= int(candidategrp[i])
-    # percentage= (candperc/total_votes) * 100
-    # print=(f"{percentage}")
+    
+    candperc= int(candidategrp[i])
+    percentage = (candperc/total_votes) * 100
+    print(f"{percentage}")
+
+for j in candidategrp:
+    if previous_poll<candidategrp[i]:
+        #previous_poll=candidategrp[i]
+        winner_name= i
 
 
 print("-" * 20)
 
-print("Winner: Khan")
+print(f"Winner: {winner_name}")
 
-# output_file = os.path.join("..", "Output", "electionresults.csv")
+output_file = os.path.join("..", "Output", "electionresults.txt")
 
 # with open(output_file, "w", newline="", encoding="utf8") as csv_file:
     
 #     csv_writer = csv.writer(csv_file, delimiter=",")
 
-#     csv_writer.writerows(f"inal)
+#     csv_writer.writerows(final)
+
+# percentage doesn't work
+#output file doesnt work
+

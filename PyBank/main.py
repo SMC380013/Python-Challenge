@@ -22,7 +22,6 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
     totalloss= 0
     profitcalc= 0
     totalprofitloss= 0
-    
 
     for row in csv_reader:
 # to calculate change in p/l month over month
@@ -33,7 +32,7 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
 
 #print(date)
 #print(profitloss)
-#below is to the greatest profit and loss date and change
+#below is to get the greatest profit and loss date and change
         if value>greatest_profit:
             greatest_profit = value
             best_month = row[0]
@@ -41,30 +40,33 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
             greatest_loss = value
             worst_month = row[0]
 #print(best_month, worst_month)
+
+#for totalprofitloss
         profitcalc = int(row[1])
         if profitcalc > 0:
             totalprofit += profitcalc
         elif profitcalc < 0:
             totalloss += profitcalc
-        totalprofitloss = totalprofit + totalloss
+        totalprofitloss = totalprofit + totalloss 
+
+finaltotalpl= totalprofitloss+ int(row[1])     
+#print(finaltotalpl)   
 
 total_months= len(date) 
 max_profit= max(profitloss)
 min_profit= min(profitloss)
-#average= int(profitloss/total_months)
+average= sum(profitloss)/(total_months - 1)
 
 print("Financial Analysis")
 print("-" * 20)
 print(f"Total Months: {total_months}")
-print(f"Total: {totalprofitloss}")
-#print(f"Average: {average}")
-print(f"Greatest increase in profits: {max_profit}")
-print(f"Greatest decrease in profits: {min_profit}")
-print("Month with greatest Increase in profits:", best_month)
-print("Month with greatest Decrease in profits:", worst_month)
+print(f"Total: {finaltotalpl}")
+print(f"Average: {average}")
+print(f"Greatest increase in profits: {best_month} ({max_profit})")
+print(f"Greatest decrease in profits: {worst_month} ({min_profit})")
 
 
-output_file = os.path.join("..", "Output", "bankoutput.csv")
+output_file = os.path.join("..", "Output", "bankoutput.txt")
 
 # with open(output_file, "w", newline="", encoding="utf8") as csv_file:
     
@@ -72,7 +74,6 @@ output_file = os.path.join("..", "Output", "bankoutput.csv")
 
 #     csv_writer.writerows(final)
 
-# total profit and loss doesn't tie to word doc, average not working
-# can't add month variables to increase and decrease profit (as these are functions and months are variables?)
+# total profit and loss doesn't tie to word doc, missing first row of data--- skipped header
 # output file creation not working
 # how do we put all results in 1 variable to enter in the output file?
