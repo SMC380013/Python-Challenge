@@ -5,6 +5,7 @@ csv_path = os.path.join("..", "Resources", "election_data.csv")
 voterid=[]
 county=[]
 candidate=[]
+previous_poll=0
 
 with open(csv_path, newline="", encoding="utf8") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
@@ -12,7 +13,7 @@ with open(csv_path, newline="", encoding="utf8") as csv_file:
 
     csv_header = next(csv_reader)
 
-    previous_poll=0
+    
     winner_name=int(0)
 
 
@@ -46,8 +47,8 @@ for i in candidategrp:
 
 for j in candidategrp:
     if previous_poll<candidategrp[i]:
-        #previous_poll=candidategrp[i]
-        winner_name= i
+        previous_poll=candidategrp[i]
+        winner_name= j
 
 
 print("-" * 20)
@@ -62,6 +63,6 @@ output_file = os.path.join("..", "Output", "electionresults.txt")
 
 #     csv_writer.writerows(final)
 
-# percentage doesn't work
-#output file doesnt work
+# winner displayed is incorrect
+# output file doesnt work
 
