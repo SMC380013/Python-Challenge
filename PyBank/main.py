@@ -66,14 +66,5 @@ print(f"Greatest increase in profits: {best_month} ({max_profit})")
 print(f"Greatest decrease in profits: {worst_month} ({min_profit})")
 
 
-output_file = os.path.join("..", "Output", "bankoutput.txt")
-
-# with open(output_file, "w", newline="", encoding="utf8") as csv_file:
+# with open("Output.txt", "w", newline="") as output:
     
-#     csv_writer = csv.writer(csv_file, delimiter=",")
-
-#     csv_writer.writerows(final)
-
-# total profit and loss doesn't tie to word doc, missing first row of data--- skipped header
-# output file creation not working
-# how do we put all results in 1 variable to enter in the output file?

@@ -55,14 +55,12 @@ print("-" * 20)
 
 print(f"Winner: {winner_name}")
 
-output_file = os.path.join("..", "Output", "electionresults.txt")
 
-# with open(output_file, "w", newline="", encoding="utf8") as csv_file:
+with open("Output.txt", "w", newline="") as output:
     
-#     csv_writer = csv.writer(csv_file, delimiter=",")
-
-#     csv_writer.writerows(final)
-
-# winner displayed is incorrect
-# output file doesnt work
+    #"print('total_votes= len(voterid)', file=<output_stream>)
+    print >>output, 'print("Election Results")\n',
+    # print >>output, 'print("-" * 20)\n'
+    # print >>output, 'print(f"Total Votes: {total_votes}")\n'
+    # print >>output, 'print("-" * 20)' 
 
